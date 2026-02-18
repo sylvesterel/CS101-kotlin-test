@@ -40,6 +40,41 @@ object Part4InheritanceAndAccessModification {
     // E.g. an Employee.work() should print one thing and Developer.work() another
     // The work() method must print something and not be blank, but you can choose what you want it to print!
 
+    open class Employee(
+        val name: String,
+        var position: String,
+        var salary: Double
+    ) {
+        open fun work() = println("Working!")
+    }
+
+    class Manager(
+        name: String,
+        position: String,
+        salary: Double,
+        var department: String
+    ): Employee(name, position, salary) {
+        override fun work() = println("I am a manager")
+    }
+
+    class Intern(
+        name: String,
+        position: String,
+        salary: Double,
+        var school: String
+    ): Employee(name, position, salary) {
+        override fun work() = println("I am an intern")
+    }
+
+    class Developer(
+        name: String,
+        position: String,
+        salary: Double,
+        var programmingLanguage: String
+    ): Employee(name, position, salary) {
+        override fun work() = println("I am a developer")
+    }
+
 
     // ---------------------- EXERCISE 3
     // Create a class named Course to represent course information
@@ -59,6 +94,20 @@ object Part4InheritanceAndAccessModification {
     //         }
     // }
 
+    class Course(
+        val courseName: String,
+        var instructor: String
+    ) {
+        var credits: Int = 0
+            set(value) {
+                field = if (value in 0..5) value else 0
+            }
+
+        val courseDuration: Int
+            get() = 15 * credits
+
+    }
+
 
     // ---------------------- EXERCISE 4
     // Create a class Athlete with properties: id, name
@@ -67,5 +116,13 @@ object Part4InheritanceAndAccessModification {
     // The class should have a public field fitnessLevel which uses the private function to return a result.
     // The setter for fitnessLevel should be private
 
+    class Athelete(
+        val id: Int,
+        val name: String
+    ) {
+        private fun calculateFitnessLevel(): Int {
+            return (0..100).random()
+        }
+    }
 
 }
